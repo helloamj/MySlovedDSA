@@ -1,3 +1,8 @@
+- Height of Tree: https://practice.geeksforgeeks.org/problems/height-of-binary-tree/1
+- Diameter of Tree: https://practice.geeksforgeeks.org/problems/diameter-of-binary-tree/1
+- Balanced Tree or Not: https://practice.geeksforgeeks.org/problems/check-for-balanced-tree/1
+- Tree Identical or Not: https://practice.geeksforgeeks.org/problems/determine-if-two-trees-are-identical/1
+- Sum Tree or Not: https://practice.geeksforgeeks.org/problems/sum-tree/1
 - ZigZag Traversal: https://practice.geeksforgeeks.org/problems/zigzag-tree-traversal/1
 - Boundary Traversal: https://practice.geeksforgeeks.org/problems/boundary-traversal-of-binary-tree/1
 - Vertical Order Traversal:https://practice.geeksforgeeks.org/problems/print-a-binary-tree-in-vertical-order/1
