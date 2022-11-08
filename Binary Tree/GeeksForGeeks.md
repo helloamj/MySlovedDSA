@@ -11,3 +11,7 @@
 - Right View: https://practice.geeksforgeeks.org/problems/right-view-of-binary-tree/1
 - Left View: https://practice.geeksforgeeks.org/problems/left-view-of-binary-tree/1
 - Diagonal Traversal: https://practice.geeksforgeeks.org/problems/diagonal-traversal-of-binary-tree/1
+- Top View: https://practice.geeksforgeeks.org/problems/bottom-view-of-binary-tree/1
+- Bottom View: https://practice.geeksforgeeks.org/problems/bottom-view-of-binary-tree/1
+- Left View: https://practice.geeksforgeeks.org/problems/left-view-of-binary-tree/1
+- Right View: https://practice.geeksforgeeks.org/problems/right-view-of-binary-tree/1
