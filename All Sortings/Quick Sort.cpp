@@ -1,4 +1,4 @@
-//Merge Sort 
+//Quick Sort 
 #include<bits/stdc++.h>
 using namespace std;
 int partition(int arr[],int l,int h)
