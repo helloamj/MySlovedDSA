@@ -773,3 +773,132 @@ int main()
     display(arr,n);
     return 0;
 }
+
+
+
+
+//BST Creation Deletion
+#include <iostream>
+using namespace std;
+class treenode
+{
+	public:
+	treenode*left;
+	treenode*right;
+	int data;
+	treenode(int d)
+	{
+		this->data= d;
+		this->left=NULL;
+		this->right=NULL;
+	}
+};
+treenode* bstcreation(treenode *root,int d)
+{
+   if(root==NULL)
+   	return new treenode(d);
+   if(d>root->data)
+   	root->right=bstcreation(root->right,d);
+   if(d<root->data)
+   	root->left=bstcreation(root->left,d);
+   return root;
+}
+int minin(treenode* root)
+{
+    treenode *temp = root;
+    while(temp->left != NULL)temp = temp->left;
+    return temp->data;
+}
+treenode* deletenode(treenode* root, int d)
+{
+    if(root == NULL)
+        return NULL;
+    if(root->data < d)
+        root->right = deletenode(root->right,d);
+    else if(root->data > d)
+        root->left = deletenode(root->left,d);
+    else
+    {
+        if(root->left == NULL && root->right == NULL)
+        {
+            free(root);
+            return NULL;
+        }
+        else if(root->left == NULL)
+        {
+            treenode *temp = root->right;
+            free(root);
+            return temp;
+        }
+        else if(root->right == NULL)
+        {
+            treenode *temp = root->left;
+            free(root);
+            return temp;
+        }
+        else
+        {
+            int rightMin = minin(root->right);
+            root->data = rightMin;
+            root->right = deletenode(root->right,rightMin);
+        }
+
+    }
+    return root;
+}
+void inordertravesal(treenode*root)
+{
+	if(!root)return;
+        inordertravesal(root->left);
+        cout<<root->data<<" ";
+        inordertravesal(root->right);
+}
+void preordertravesal(treenode*root)
+{
+	if(!root)return;
+        cout<<root->data<<" ";
+        preordertravesal(root->left);
+        preordertravesal(root->right);
+}
+void postordertravesal(treenode*root)
+{
+	if(!root)return;
+        postordertravesal(root->left);
+        postordertravesal(root->right);
+        cout<<root->data<<" ";
+}
+int main()
+{
+	treenode* root=NULL;
+	int ch;
+	do{
+	    cout<<"Enter the choice to perform in BST:"<<endl;
+	    cout<<"1. Insert the node"<<endl;
+	    cout<<"2. Delete a node"<<endl;
+	    cout<<"3. Print in Inorder Traversal"<<endl;
+	    cout<<"4. Print in Preorder Traversal"<<endl;
+	    cout<<"5. Print in Postorder Traversal"<<endl;
+	    cout<<"6. Exit"<<endl;
+	    cin>>ch;
+	    switch(ch)
+	    {
+	        case 1 : cout<<endl<<"Enter the data to insert"<<endl;
+	        int d;
+	        cin>>d;
+	        root = bstcreation(root,d);break;
+	        case 2 : cout<<endl<<"Enter the node to delete "<<endl;
+	        int a;
+	        cin>>a;
+	        root = deletenode(root,a);break;
+	        case 3 : cout<<"Inorder Traversal"<<endl;
+            inordertravesal(root);break;
+	        case 4 :cout<<endl<<"Preorder Traversal"<<endl;
+            preordertravesal(root);break;
+	        case 5 :cout<<endl<<"Postorder Traversal"<<endl;
+            postordertravesal(root);break;
+	        case 6 :break;
+	        default : cout<<endl<<"*Indid Input*"<<endl;
+	        
+	    }
+	}while(ch!=6);
+}
