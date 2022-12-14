@@ -872,6 +872,7 @@ int main()
 	treenode* root=NULL;
 	int ch;
 	do{
+		cout<<endl;
 	    cout<<"Enter the choice to perform in BST:"<<endl;
 	    cout<<"1. Insert the node"<<endl;
 	    cout<<"2. Delete a node"<<endl;
@@ -898,7 +899,7 @@ int main()
             postordertravesal(root);break;
 	        case 6 :break;
 	        default : cout<<endl<<"*Indid Input*"<<endl;
-	        
+	        break;
 	    }
 	}while(ch!=6);
 }
