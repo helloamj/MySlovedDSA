@@ -903,3 +903,57 @@ int main()
 	    }
 	}while(ch!=6);
 }
+
+//Graph DFS/BFS
+
+#include <bits/stdc++.h>
+using namespace std;
+  int arr[20][20]={0};
+void dfs(int start,int *vis)
+{
+  cout<<start<<" ";
+  vis[start]=1;
+  for(int i=0;i<20;i++)
+    {
+      if(arr[start][i]==1&&vis[i]==0)
+        dfs(i,vis);
+    }
+}
+int main() {
+  cout<<"Ente the edges of graph :"<<endl;
+  int n;
+  cin>>n;
+  for(int i = 0;i<n ; i++)
+    {
+      int a,b;
+      cin>>a>>b;
+      arr[b][a]=1;
+      arr[a][b]=1;
+    }
+  cout<<"Enter the place from which you waht to perform BFS"<<endl;
+  int d;
+  cin>>d;
+  int vis[20]={0};
+  queue<int> q;
+  vis[d]=1;
+  q.push(d);
+  while(!q.empty())
+    {
+      int temp=q.front();
+      q.pop();
+      cout<<temp<<" ";
+      for(int i=0;i<20;i++){
+        
+        if(arr[temp][i]==1&&vis[i]!=1)
+         {
+          vis[i]=1;
+          q.push(i);
+          }
+        }
+    }
+  int vis2[20]={0};
+  cout<<"DFS"<<endl;
+  dfs(1,vis2);
+return 0;
+}
+//5 1 2 1 3 2 4 3 4 1 4
