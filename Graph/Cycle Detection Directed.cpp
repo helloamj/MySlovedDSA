@@ -1,44 +1,44 @@
 #include<bits/stdc++.h>
-bool checkcycle(int node,unordered_map<int , list<int> > &adj,
-    unordered_map<int , bool > &visited,
-    unordered_map<int , bool > &dfsvisited){
-    visited[node]=true;
-    dfsvisited[node]=true;
-    for(auto it:adj[node])
+using namespace std;
+unordered_map<int , vector<int> > mp;
+bool cycle=false;
+bool iscycle(int i,vector<bool> &vis,vector<bool> &st)
+{
+    st[i]=true;
+    if(!vis[i])
     {
-        if(!visited[it])
+        vis[i]=true;
+        for(auto x:mp[i])
         {
-            bool cp = checkcycle(it,adj,visited,dfsvisited);
-            if(cp)return true;
-        }
-        else if(dfsvisited[it])
-        {
+            if(!vis[x] and iscycle(x,vis,st))
+            return true;
+            if(st[x])
             return true;
         }
     }
-    dfsvisited[node]=false;
-    return false;
-}
-
-
-int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
-  unordered_map<int , list<int> > adj;
-    unordered_map<int , bool > visited;
-    unordered_map<int , bool > dfsvisited;
     
-    for(int i=0;i<edges.size();i++)
+        st[i]=false;
+        return false;
+}
+int main ()
+{
+    int n,m;
+    cout<<"Enter no of nodes and edges"<<endl;
+    cin>>n>>m;
+    for(int i = 0;i<m; i++)
     {
-        int a = edges[i].first;
-        int b = edges[i].second;
-        adj[a].push_back(b);
+        int a,b;
+        cin>>a>>b;
+        mp[a].push_back(b);
     }
-    for(int i=1;i<n;i++)
+    vector<bool> vis(n,0),st(n,0);
+    for(int i=0;i<n;i++)
     {
-        if(!visited[i])
+        if(!vis[i] && iscycle(i,vis,st))
         {
-            bool ans = checkcycle(i,adj,visited,dfsvisited);
-            if(ans)return true;
+            cycle=true;
         }
     }
-    return false;
+    if(cycle)cout<<"Present"<<endl;
+    else cout<<"Not Present"<<endl;
 }
