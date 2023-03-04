@@ -1,63 +1,43 @@
 #include<bits/stdc++.h>
-bool checkcycle(int n,unordered_map<int,vector<int>> &mp,
-    unordered_map<int,bool> &visited,
-    unordered_map<int,int> &parent){
-    visited[n]=true;
-    parent[n]=-1;
-    queue<int>q;
-    q.push(n);
-    while(!q.empty())
-    {
-        int front = q.front();
-        q.pop();
-        for(auto it:mp[front])
-        {
-            if(visited[it]==true&&parent[front]!=it)
-                return true;
-            else if(!visited[it]){
-                q.push(it);
-                parent[it]=front;
-                visited[it]=true;
-            }
-        }
-    }
-    return false;
-}
-bool checkcycleDFS(int n,int parent,unordered_map<int,vector<int>> &mp,
-    unordered_map<int,bool> &visited){
-    visited[n]=true;
-    for(auto it:mp[n])
-    {
-        if(!visited[it]){
-            bool cp=checkcycleDFS(it,n,mp,visited);
-        if(cp)return true;
-        }
-        else if (it != parent)
-            return true;
-    }
-    return false;
-    
-}
-string cycleDetection (vector<vector<int>>& edges, int n, int m)
+using namespace std;
+unordered_map<int , vector<int> > mp;
+bool cycle=false;
+bool iscycle(int i,vector<bool> &vis,int parent)
 {
-    unordered_map<int,vector<int>> mp;
-    unordered_map<int,bool> visited;
-    unordered_map<int,int> parent;
-    for(int i=0;i<m;i++)
+    vis[i]=true;
+    for(auto x: mp[i])
     {
-        int a=edges[i][0];
-        int b=edges[i][1];
+        if (!vis[x]) {
+            if (iscycle(x,vis,i)) {
+                return true;
+            }
+        } else if (parent!=x) {
+            return true;
+        }
+
+    }
+    return false;
+}
+int main ()
+{
+    int n,m;
+    cout<<"Enter no of nodes and edges"<<endl;
+    cin>>n>>m;
+    for(int i = 0;i<m; i++)
+    {
+        int a,b;
+        cin>>a>>b;
         mp[a].push_back(b);
         mp[b].push_back(a);
     }
+    vector<bool> vis(n,0);
     for(int i=0;i<n;i++)
     {
-        if(!visited[i])
+        if(!vis[i] && iscycle(i,vis,-1))
         {
-           // bool ans=checkcycle(i,mp,visited,parent);
-            bool ans=checkcycleDFS(i,-1,mp,visited);
-            if(ans)return "Yes";
+            cycle=true;
         }
     }
-    return "No";
+    if(cycle)cout<<"Present"<<endl;
+    else cout<<"Not Present"<<endl;
 }
